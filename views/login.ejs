@@ -1,0 +1,23 @@
+<style>
+    .form-signin {
+        max-width: 330px;
+        padding: 15px;
+        margin-bottom: 50px;
+    }
+</style>
+<div class="form-signin w-90 m-auto">
+    <form action="/login" method="post">
+        <h1 class="h3 mt-3 mb-3 fw-normal text-center">Please sign in</h1>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" name="email" required id="exampleInputEmail1" aria-describedby="emailHelp" value="david.jones@example.com">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="password" required value="password">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+

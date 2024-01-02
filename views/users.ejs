@@ -1,0 +1,21 @@
+<table class="table caption-top mb-5">
+    <caption><%= title %></caption>
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% items.forEach(item => { %>
+        <tr>
+            <th scope="row"><%= item.user_id %></th>
+            <td><%= item.first_name %></td>
+            <td><%= item.last_name %></td>
+            <td><%= item.email %></td>
+        </tr>
+    <% }); %>
+    </tbody>
+</table>

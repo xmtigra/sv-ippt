@@ -1,0 +1,19 @@
+<table class="table caption-top mb-5">
+    <caption><%= title %></caption>
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Check In Date</th>
+        <th scope="col">Check Out Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% items.forEach(item => { %>
+        <tr>
+            <th scope="row"><%= item.reservation_id %></th>
+            <td><%= item.check_in_date %></td>
+            <td><%= item.check_out_date %></td>
+        </tr>
+    <% }); %>
+    </tbody>
+</table>

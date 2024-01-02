@@ -1,0 +1,21 @@
+<table class="table caption-top mb-5">
+    <caption><%= title %></caption>
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Reservation id</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Payment Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% items.forEach(item => { %>
+        <tr>
+            <th scope="row"><%= item.payment_id %></th>
+            <td><%= item.reservation_id %></td>
+            <td><%= item.amount %></td>
+            <td><%= item.payment_date %></td>
+        </tr>
+    <% }); %>
+    </tbody>
+</table>
