@@ -5,11 +5,12 @@
   "type": "module",
   "main": "server.mjs",
   "scripts": {
-    "start": "nodemon server.mjs",
+    "start": "node server.mjs",
+    "dev": "nodemon server.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["node", "express", "ejs", "mysql", "bootstrap"],
+  "author": "Pyvovarchuk Andriy",
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^5.3.2",
