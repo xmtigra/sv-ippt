@@ -1,0 +1,47 @@
+<a href="/staff" class="focus-ring py-1 px-2 text-decoration-none border rounded-2">Back</a>
+
+<div class="row">
+    <div class="col-md"></div>
+    <div class="col-md">
+        <h1><%= title %></h1>
+        <form action="" method="post">
+            <div class="mb-3">
+                <label for="first_name" class="form-label">First Name:</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" required value="<%= item.first_name %>">
+            </div>
+
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Last Name:</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" required value="<%= item.last_name %>">
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required value="<%= item.email %>">
+            </div>
+
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone:</label>
+                <input type="tel" class="form-control" id="phone" name="phone" required value="<%= item.phone %>">
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" class="form-control" id="password" required disabled aria-describedby="passwordHelp">
+                <div id="passwordHelp" class="form-text">If you want to change password, please write email to admin.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="role" class="form-label">Role:</label>
+                <select class="form-select" id="role" name="role" required>
+                    <option value="" disabled selected>Select Role</option>
+                    <option value="Manager" <%= item.role === 'Manager' ? 'selected' : '' %>>Manager</option>
+                    <option value="Receptionist" <%= item.role === 'Receptionist' ? 'selected' : '' %>>Receptionist</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+    <div class="col-md"></div>
+</div>

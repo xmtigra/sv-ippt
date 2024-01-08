@@ -1,19 +1,57 @@
-<table class="table caption-top mb-5">
-    <caption><%= title %></caption>
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Check In Date</th>
-        <th scope="col">Check Out Date</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% items.forEach(item => { %>
+<div class="clearfix">
+    <a href="/reservations/add" class="focus-ring py-1 px-2 text-decoration-none border rounded-2 float-end">
+        Add
+    </a>
+</div>
+
+<div class="table-responsive">
+    <table class="table caption-top mb-5 table-hover">
+        <caption><%= title %></caption>
+        <thead>
         <tr>
-            <th scope="row"><%= item.reservation_id %></th>
-            <td><%= item.check_in_date %></td>
-            <td><%= item.check_out_date %></td>
+            <th scope="col">ID</th>
+            <th scope="col">Reservation Date</th>
+            <th scope="col">Check In Date</th>
+            <th scope="col">Check Out Date</th>
+            <th scope="col">Room</th>
+            <th scope="col">Client</th>
+            <th scope="col">Total Amount</th>
+            <th scope="col" class="text-center">Actions</th>
         </tr>
-    <% }); %>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        <% items.forEach(item => { %>
+            <tr>
+                <th scope="row"><%= item.reservation_id %></th>
+                <td><%= new Intl.DateTimeFormat('en-GB', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: '2-digit'
+                    }).format(new Date(item.reservation_date)) %></td>
+                <td><%= new Intl.DateTimeFormat('en-GB', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: '2-digit'
+                    }).format(new Date(item.check_in_date)) %></td>
+                <td><%= new Intl.DateTimeFormat('en-GB', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: '2-digit'
+                    }).format(new Date(item.check_out_date)) %></td>
+                <td><a href="/rooms/<%= item.room_id %>"><%= item.room_number %> <%= item.room_type %></a></td>
+                <td><a href="/clients/<%= item.user_id %>"><%= item.first_name %> <%= item.last_name %></a></td>
+                <td>$ <%= item.total_amount %></td>
+                <td class="text-center">
+                    <a href="reservations/<%= item.reservation_id %>/view"
+                       class="btn btn-sm btn-outline-primary">View</a>
+                    <a href="reservations/<%= item.reservation_id %>" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <form action="/reservations/<%= item.reservation_id %>/delete" method="POST" class="d-inline">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
+</div>

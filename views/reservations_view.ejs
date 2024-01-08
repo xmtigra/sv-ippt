@@ -1,0 +1,156 @@
+<a href="/" class="focus-ring py-1 px-2 text-decoration-none border rounded-2">Back</a>
+
+<br>
+<br>
+<div class="row">
+    <div class="col-md-4">
+        <h3><%= title %></h3>
+        <fieldset disabled>
+            <div class="mb-3">
+                <label for="checkIn" class="form-label">Check In</label>
+                <input type="text" class="form-control" id="checkIn" value="<%= new Intl.DateTimeFormat('en-GB', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: '2-digit'
+                }).format(new Date(item.check_in_date)) %>" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="checkOut" class="form-label">Check Out</label>
+                <input type="text" class="form-control" id="checkOut" value="<%= new Intl.DateTimeFormat('en-GB', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: '2-digit'
+                }).format(new Date(item.check_out_date)) %>" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="days" class="form-label">Days</label>
+                <input type="text" class="form-control" id="days" value="<%= days %>" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="room" class="form-label">Room</label>
+                <input type="text" class="form-control" id="room" value="<%= room.room_number %> <%= room.room_type %>"
+                       readonly>
+            </div>
+            <div class="mb-3">
+                <label for="amount" class="form-label"><b>Amount</b></label>
+                <input type="text" class="form-control" id="amount" value=" $ <%= amount %>" readonly>
+            </div>
+        </fieldset>
+        <a href="/reservations/<%= item.reservation_id %>" class="btn btn-sm btn-outline-primary">Edit</a>
+    </div>
+    <div class="col-md-8">
+
+        <div class="table-responsive">
+            <table class="table caption-top mb-5 table-hover">
+                <caption>Room:</caption>
+                <thead>
+                <tr>
+                    <th scope="col">Number</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Price</th>
+                    <th scope="col" class="text-end">Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><%= room.room_number %></td>
+                    <td><%= room.room_type %></td>
+                    <td>$ <%= room.price %></td>
+                    <td class="text-end">$ <%= room.price * days %></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table caption-top mb-5 table-hover">
+                <caption>Services:</caption>
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Hours</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col" class="text-end">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% services.forEach(item => { %>
+                    <tr>
+                        <td><%= item.service_name %></td>
+                        <td><%= item.hours_used %></td>
+                        <td>$ <%= item.price %></td>
+                        <td>$ <%= item.total_amount %></td>
+                        <td class="text-end">
+                            <a href="/reservations/<%= item.reservation_id %>/services/<%= item.service_id %>"
+                               class="focus-ring btn btn-sm btn-outline-primary">Edit</a>
+                            <form action="/reservations/<%= item.reservation_id %>/services/<%= item.service_id %>/delete"
+                                  method="POST" class="d-inline">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+                <% if (services.length === 0) { %>
+                    <tr>
+                        <td colspan="5" class="text-center">No services</td>
+                    </tr>
+                <% } %>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <a href="/reservations/<%= item.reservation_id %>/services/add"
+                           class="btn btn-sm btn-outline-primary">Add service</a>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table caption-top mb-5 table-hover">
+                <caption>Payments:</caption>
+                <thead>
+                <tr>
+                    <th scope="col">Payment date</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col" class="text-end">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% payments?.forEach(item => { %>
+                    <tr>
+                        <td><%= new Intl.DateTimeFormat('en-GB', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: '2-digit'
+                            }).format(new Date(item.payment_date)) %></td>
+                        <td>$ <%= item.amount %></td>
+                        <td class="text-end">
+                            <a href="/payments/<%= item.payment_id %>" class="btn btn-sm btn-outline-primary">Edit</a>
+                            <form action="/payments/<%= item.payment_id %>/delete" method="POST" class="d-inline">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+                <% if (payments.length === 0) { %>
+                    <tr>
+                        <td colspan="3" class="text-center">No payments</td>
+                    </tr>
+                <% } %>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="3">
+                        <a href="/payments/add?reservation_id=<%= item.reservation_id %>"
+                           class="btn btn-sm btn-outline-primary">Add payment</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

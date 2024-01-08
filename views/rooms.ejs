@@ -1,23 +1,35 @@
-<table class="table caption-top mb-5">
-    <caption><%= title %></caption>
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Number</th>
-        <th scope="col">Type</th>
-        <th scope="col">Price</th>
-        <th scope="col">Availability</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% items.forEach(item => { %>
+<div class="clearfix">
+    <a href="/rooms/add" class="focus-ring py-1 px-2 text-decoration-none border rounded-2 float-end">
+        Add
+    </a>
+</div>
+
+<div class="table-responsive">
+    <table class="table caption-top mb-5 table-hover">
+        <caption><%= title %></caption>
+        <thead>
         <tr>
-            <th scope="row"><%= item.room_id %></th>
-            <td><%= item.room_number %></td>
-            <td><%= item.room_type %></td>
-            <td><%= item.price %></td>
-            <td><%= item.availability %></td>
+            <th scope="col">Number</th>
+            <th scope="col">Type</th>
+            <th scope="col">Price</th>
+            <th scope="col" class="text-center">Actions</th>
         </tr>
-    <% }); %>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        <% items.forEach(item => { %>
+            <tr>
+                <td><a href="/rooms/<%= item.room_id %>"><%= item.room_number %></a></td>
+                <td><%= item.room_type %></td>
+                <td>$ <%= item.price %></td>
+                <td class="text-center">
+                    <a href="/rooms/<%= item.room_id %>" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <form action="/rooms/<%= item.room_id %>/delete" method="POST" class="d-inline">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <% }); %>
+        </tbody>
+    </table>
+</div>

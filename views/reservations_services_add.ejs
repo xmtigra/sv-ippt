@@ -1,0 +1,31 @@
+<a href="/reservations/<%= item.reservation_id %>/view"
+   class="focus-ring py-1 px-2 text-decoration-none border rounded-2">Back</a>
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h3><%= title %></h3>
+        <form action="" method="post">
+
+            <div class="mb-3">
+                <label for="service_id" class="form-label">Service:</label>
+                <select class="form-select" id="service_id" name="service_id" required>
+                    <option value="" disabled selected>Select a service</option>
+                    <% services.forEach(function(item) { %>
+                        <option value="<%= item.service_id %>">
+                            <%= item.service_name %> ($ <%= item.price %> / hour)
+                        </option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="hours_used" class="form-label">Hours Used:</label>
+                <input type="number" class="form-control" id="hours_used" name="hours_used" required max="12" min="1">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+    <div class="col-md-4"></div>
+</div>

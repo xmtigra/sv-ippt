@@ -1,0 +1,143 @@
+<a href="/clients" class="focus-ring py-1 px-2 text-decoration-none border rounded-2">Back</a>
+
+<br>
+<br>
+<div class="row">
+    <div class="col-md-4">
+        <h3><%= title %></h3>
+        <fieldset disabled>
+            <form action="" method="post">
+                <div class="mb-3">
+                    <label for="first_name" class="form-label">First Name:</label>
+                    <input type="text" class="form-control" id="first_name" name="first_name" required
+                           value="<%= item.first_name %>">
+                </div>
+
+                <div class="mb-3">
+                    <label for="last_name" class="form-label">Last Name:</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name" required
+                           value="<%= item.last_name %>">
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required value="<%= item.email %>">
+                </div>
+
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone:</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" required value="<%= item.phone %>">
+                </div>
+            </form>
+        </fieldset>
+        <a href="/clients/<%= item.user_id %>" class="btn btn-sm btn-outline-primary">Edit</a>
+    </div>
+    <div class="col-md-8">
+        <div class="table-responsive">
+            <table class="table caption-top mb-5 table-hover">
+                <caption>Reservations:</caption>
+                <thead>
+                <tr>
+                    <th scope="col">Check In</th>
+                    <th scope="col">Check Out</th>
+                    <th scope="col">Room</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col" class="text-center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% reservations.forEach(item => { %>
+                    <tr>
+                        <td><%= new Intl.DateTimeFormat('en-GB', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: '2-digit'
+                            }).format(new Date(item.check_in_date)) %></td>
+                        <td><%= new Intl.DateTimeFormat('en-GB', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: '2-digit'
+                            }).format(new Date(item.check_out_date)) %></td>
+                        <td><a href="/rooms/<%= item.room_id %>"><%= item.room_number %> <%= item.room_type %></a></td>
+                        <td>$ <%= item.total_amount %></td>
+                        <td class="text-center">
+                            <a href="/reservations/<%= item.reservation_id %>" class="btn btn-sm btn-outline-primary">Edit</a>
+                        </td>
+                    </tr>
+                <% }); %>
+                <% if (reservations.length === 0) { %>
+                    <tr>
+                        <td colspan="5" class="text-center">No reservations</td>
+                    </tr>
+                <% } %>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table caption-top mb-5 table-hover">
+                <caption>Services:</caption>
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Hours</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col" class="text-center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% services.forEach(item => { %>
+                    <tr>
+                        <td><%= item.service_name %></td>
+                        <td>$ <%= item.price %></td>
+                        <td><%= item.hours_used %></td>
+                        <td>$ <%= item.total_amount %></td>
+                        <td class="text-center">
+                            <a href="/services/<%= item.service_id %>" class="btn btn-sm btn-outline-primary">Edit</a>
+                        </td>
+                    </tr>
+                <% }) %>
+                <% if (services.length === 0) { %>
+                    <tr>
+                        <td colspan="5" class="text-center">No services</td>
+                    </tr>
+                <% } %>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table caption-top mb-5 table-hover">
+                <caption>Payments:</caption>
+                <thead>
+                <tr>
+                    <th scope="col">Payment date</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col" class="text-center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% payments?.forEach(item => { %>
+                    <tr>
+                        <td><%= new Intl.DateTimeFormat('en-GB', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: '2-digit'
+                            }).format(new Date(item.payment_date)) %></td>
+                        <td>$ <%= item.amount %></td>
+                        <td class="text-center">
+                            <a href="/payments/<%= item.payment_id %>" class="btn btn-sm btn-outline-primary">Edit</a>
+                        </td>
+                    </tr>
+                <% }); %>
+                <% if (payments.length === 0) { %>
+                    <tr>
+                        <td colspan="2" class="text-center">No payments</td>
+                    </tr>
+                <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

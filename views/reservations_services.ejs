@@ -1,0 +1,60 @@
+<a href="/reservations/<%= item.reservation_id %>/view"
+   class="focus-ring py-1 px-2 text-decoration-none border rounded-2">Back</a>
+
+<a href="/reservations/<%= item.reservation_id %>/add"
+   class="focus-ring py-1 px-2 text-decoration-none border rounded-2 float-end">Add</a>
+
+<br>
+<br>
+
+<div class="table-responsive">
+    <table class="table caption-top mb-5 table-hover">
+        <caption>Services for Reservation
+            <strong><%= item.reservation_id %></strong>
+            -
+            (<%= new Intl.DateTimeFormat('en-GB', {
+                year: 'numeric',
+                month: 'long',
+                day: '2-digit'
+            }).format(new Date(item.check_in_date)) %> -
+            <%= new Intl.DateTimeFormat('en-GB', {
+                year: 'numeric',
+                month: 'long',
+                day: '2-digit'
+            }).format(new Date(item.check_out_date)) %>)
+        </caption>
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Hours</th>
+            <th scope="col">Price</th>
+            <th scope="col">Amount</th>
+            <th scope="col" class="text-end">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% services.forEach(item => { %>
+            <tr>
+                <td><%= item.service_name %></td>
+                <td><%= item.hours_used %></td>
+                <td>$ <%= item.price %></td>
+                <td>$ <%= item.total_amount %></td>
+                <td class="text-end">
+                    <a href="/reservations/<%= item.reservation_id %>/services/<%= item.service_id %>"
+                       class="focus-ring btn btn-sm btn-outline-primary">Edit</a>
+                    <form action="/reservations/<%= item.reservation_id %>/services/<%= item.service_id %>/delete" method="POST" class="d-inline">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+        <% if (services.length === 0) { %>
+            <tr>
+                <td colspan="5" class="text-center">No services</td>
+            </tr>
+        <% } %>
+        </tbody>
+    </table>
+</div>
+

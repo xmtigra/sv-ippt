@@ -1,5 +1,5 @@
 <div class="clearfix">
-    <a href="/staff/add" class="focus-ring py-1 px-2 text-decoration-none border rounded-2 float-end">
+    <a href="/clients/add" class="focus-ring py-1 px-2 text-decoration-none border rounded-2 float-end">
         Add
     </a>
 </div>
@@ -12,20 +12,19 @@
             <th scope="col">Full Name</th>
             <th scope="col">Email</th>
             <th scope="col">Phone</th>
-            <th scope="col">Role</th>
             <th scope="col" class="text-center">Actions</th>
         </tr>
         </thead>
         <tbody>
         <% items.forEach(item => { %>
             <tr>
-                <td><a href="/staff/<%= item.staff_id %>"><%= item.first_name %> <%= item.last_name %></a></td>
+                <td><a href="/clients/<%= item.user_id %>"><%= item.first_name %> <%= item.last_name %></a></td>
                 <td><%= item.email %></td>
                 <td><a href="tel:<%= item.phone %>"><%= item.phone %></a></td>
-                <td><%= item.role %></td>
                 <td class="text-center">
-                    <a href="/staff/<%= item.staff_id %>" class="btn btn-sm btn-outline-primary">Edit</a>
-                    <form action="/staff/<%= item.staff_id %>/delete" method="POST" class="d-inline">
+                    <a href="/clients/<%= item.user_id %>/view" class="btn btn-sm btn-outline-primary">View</a>
+                    <a href="/clients/<%= item.user_id %>" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <form action="/clients/<%= item.user_id %>/delete" method="POST" class="d-inline">
                         <input type="hidden" name="_method" value="DELETE">
                         <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                     </form>

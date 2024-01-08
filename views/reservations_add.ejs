@@ -1,0 +1,43 @@
+<a href="/" class="focus-ring py-1 px-2 text-decoration-none border rounded-2">Back</a>
+
+<div class="row">
+    <div class="col-md"></div>
+    <div class="col-md">
+        <h1><%= title %></h1>
+        <form action="" method="post">
+
+            <div class="mb-3">
+                <label for="room_id" class="form-label">Room:</label>
+                <select class="form-select" id="room_id" name="room_id" required>
+                    <option value="" disabled selected>Select a room</option>
+                    <% rooms.forEach(function(room) { %>
+                        <option value="<%= room.room_id %>"><%= room.room_number %> <%= room.room_type %> ($ <%= room.price %> per day)</option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="user_id" class="form-label">Client:</label>
+                <select class="form-select" id="user_id" name="user_id" required>
+                    <option value="" disabled selected>Select a client</option>
+                    <% items.forEach(function(client) { %>
+                        <option value="<%= client.user_id %>"><%= client.first_name %> <%= client.last_name %> (<%= client.email %>)</option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="check_in_date" class="form-label">Check In Date:</label>
+                <input type="date" class="form-control" id="check_in_date" name="check_in_date" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="check_out_date" class="form-label">Check Out Date:</label>
+                <input type="date" class="form-control" id="check_out_date" name="check_out_date" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+    <div class="col-md"></div>
+</div>
